@@ -154,7 +154,7 @@ public class SlowSqlPreparedStatement extends SlowSqlStatement implements Prepar
         boolean resultSet = preparedStatement.execute();
         if (resultSet) {
             // 总条数
-            sqlMonitor.fetchSize(this.getResultSet());
+            sqlMonitor.fetchSize(preparedStatement.getResultSet());
         }
         // 记录日志
         sqlMonitor.afterExecute();

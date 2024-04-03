@@ -40,11 +40,12 @@ public class SqlMonitor {
 
     public void fetchSize(ResultSet resultSet) throws SQLException {
         fetchRowCount = 0L;
-        if (resultSet != null && resultSet.next()) {
-            while (resultSet.next()) {
-                fetchRowCount++;
-            }
-        }
+        // TODO 获取结果总条数，并不影响后续取值逻辑
+//        if (resultSet != null && resultSet.next()) {
+//            while (resultSet.next()) {
+//                fetchRowCount++;
+//            }
+//        }
     }
 
     public void setSql(String sql) {
