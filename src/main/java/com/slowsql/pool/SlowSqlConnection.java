@@ -1,8 +1,10 @@
 package com.slowsql.pool;
 
 import com.slowsql.executor.SlowSqlPreparedStatement;
+import com.slowsql.plugin.Interceptor;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
@@ -10,12 +12,14 @@ import java.util.concurrent.Executor;
 public class SlowSqlConnection implements Connection {
 
     private Connection connection;
+    private List<Interceptor> interceptors;
 
     private SlowSqlConnection() {
     }
 
-    public SlowSqlConnection(Connection connection) {
+    public SlowSqlConnection(Connection connection, List<Interceptor> interceptors) {
         this.connection = connection;
+        this.interceptors = interceptors;
     }
 
     @Override
@@ -25,7 +29,7 @@ public class SlowSqlConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return new SlowSqlPreparedStatement(connection.prepareStatement(sql));
+        return new SlowSqlPreparedStatement(connection.prepareStatement(sql), interceptors);
     }
 
     @Override
