@@ -1,6 +1,9 @@
 package com.slowsql.pool;
 
+import com.slowsql.executor.SlowSqlCallableStatement;
 import com.slowsql.executor.SlowSqlPreparedStatement;
+import com.slowsql.executor.SlowSqlStatement;
+import com.slowsql.monitor.SqlMonitor;
 import com.slowsql.plugin.Interceptor;
 
 import java.sql.*;
@@ -24,17 +27,20 @@ public class SlowSqlConnection implements Connection {
 
     @Override
     public Statement createStatement() throws SQLException {
-        return connection.createStatement();
+        SqlMonitor sqlMonitor = new SqlMonitor(interceptors);
+        return new SlowSqlStatement(this, connection.createStatement(), sqlMonitor);
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return new SlowSqlPreparedStatement(connection.prepareStatement(sql), interceptors);
+        SqlMonitor sqlMonitor = new SqlMonitor(interceptors, sql);
+        return new SlowSqlPreparedStatement(this, connection.prepareStatement(sql), sqlMonitor);
     }
 
     @Override
     public CallableStatement prepareCall(String sql) throws SQLException {
-        return connection.prepareCall(sql);
+        SqlMonitor sqlMonitor = new SqlMonitor(interceptors, sql);
+        return new SlowSqlCallableStatement(this, connection.prepareCall(sql), sqlMonitor);
     }
 
     @Override
