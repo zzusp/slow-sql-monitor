@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetProvider;
+
 public class SqlMonitor {
 
     private List<Interceptor> interceptors;
@@ -38,14 +41,17 @@ public class SqlMonitor {
         }
     }
 
-    public void fetchSize(ResultSet resultSet) throws SQLException {
+    public ResultSet fetchRowCount(ResultSet rs) throws SQLException {
         fetchRowCount = 0L;
-        // TODO 获取结果总条数，并不影响后续取值逻辑
-//        if (resultSet != null && resultSet.next()) {
-//            while (resultSet.next()) {
-//                fetchRowCount++;
-//            }
-//        }
+        // 创建新的CachedRowSet
+        CachedRowSet newRs = RowSetProvider.newFactory().createCachedRowSet();
+        // 遍历CachedRowSet中的每一行
+        while (newRs.next()) {
+            fetchRowCount++;
+        }
+        newRs.close();
+        // 返回原rs
+        return rs;
     }
 
     public void setSql(String sql) {

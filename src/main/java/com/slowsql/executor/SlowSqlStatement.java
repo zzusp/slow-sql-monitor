@@ -22,7 +22,7 @@ public class SlowSqlStatement implements Statement {
         // 记录日志
         sqlMonitor.beforeExecute();
         // 执行
-        ResultSet resultSet = statement.executeQuery(sql);
+        ResultSet resultSet = sqlMonitor.fetchRowCount(statement.executeQuery(sql));
         // 记录日志
         sqlMonitor.afterExecute();
         return resultSet;
@@ -116,7 +116,7 @@ public class SlowSqlStatement implements Statement {
 
     @Override
     public ResultSet getResultSet() throws SQLException {
-        return statement.getResultSet();
+        return sqlMonitor.fetchRowCount(statement.getResultSet());
     }
 
     @Override

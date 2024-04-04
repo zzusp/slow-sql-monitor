@@ -29,7 +29,7 @@ public class SlowSqlPreparedStatement extends SlowSqlStatement implements Prepar
         // 执行
         ResultSet resultSet = preparedStatement.executeQuery();
         // 总条数
-        sqlMonitor.fetchSize(resultSet);
+        sqlMonitor.fetchRowCount(resultSet);
         // 记录日志
         sqlMonitor.afterExecute();
         return resultSet;
@@ -152,10 +152,7 @@ public class SlowSqlPreparedStatement extends SlowSqlStatement implements Prepar
         sqlMonitor.beforeExecute();
         // 执行
         boolean resultSet = preparedStatement.execute();
-        if (resultSet) {
-            // 总条数
-            sqlMonitor.fetchSize(preparedStatement.getResultSet());
-        }
+        preparedStatement.getResultSet();
         // 记录日志
         sqlMonitor.afterExecute();
         return resultSet;
