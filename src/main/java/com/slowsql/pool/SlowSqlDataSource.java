@@ -1,40 +1,33 @@
 package com.slowsql.pool;
 
-import com.slowsql.plugin.Interceptor;
+import com.slowsql.config.SlowSqlConfig;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class SlowSqlDataSource implements DataSource {
 
     private DataSource dataSource;
-    private List<Interceptor> interceptors;
+    private SlowSqlConfig config;
 
     private SlowSqlDataSource() {
     }
 
-    public SlowSqlDataSource(DataSource dataSource) {
+    public SlowSqlDataSource(DataSource dataSource, SlowSqlConfig config) {
         this.dataSource = dataSource;
-        this.interceptors = new ArrayList<>();
-    }
-
-    public SlowSqlDataSource(DataSource dataSource, List<Interceptor> interceptors) {
-        this.dataSource = dataSource;
-        this.interceptors = interceptors;
+        this.config = config;
     }
 
     public Connection getConnection() throws SQLException {
-        return new SlowSqlConnection(dataSource.getConnection(), interceptors);
+        return new SlowSqlConnection(dataSource.getConnection(), config);
     }
 
     public Connection getConnection(String username, String password) throws SQLException {
-        return new SlowSqlConnection(dataSource.getConnection(username, password), interceptors);
+        return new SlowSqlConnection(dataSource.getConnection(username, password), config);
     }
 
     public PrintWriter getLogWriter() throws SQLException {

@@ -27,9 +27,7 @@ public class SlowSqlPreparedStatement extends SlowSqlStatement implements Prepar
         // 记录日志
         sqlMonitor.beforeExecute();
         // 执行
-        ResultSet resultSet = preparedStatement.executeQuery();
-        // 总条数
-        sqlMonitor.fetchRowCount(resultSet);
+        ResultSet resultSet = new SlowSqlResultSet(preparedStatement.executeQuery(), sqlMonitor);
         // 记录日志
         sqlMonitor.afterExecute();
         return resultSet;

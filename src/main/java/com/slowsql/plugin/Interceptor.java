@@ -8,4 +8,6 @@ public interface Interceptor {
 
     void afterExecute(SqlMonitor sqlMonitor);
 
+    void closeExecute(SqlMonitor sqlMonitor);
+
 }

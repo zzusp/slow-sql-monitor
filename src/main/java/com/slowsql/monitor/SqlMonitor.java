@@ -1,5 +1,6 @@
 package com.slowsql.monitor;
 
+import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.plugin.Interceptor;
 
 import java.sql.ResultSet;
@@ -11,51 +12,64 @@ import javax.sql.rowset.RowSetProvider;
 
 public class SqlMonitor {
 
-    private List<Interceptor> interceptors;
+    private SlowSqlConfig config;
     private String sql;
     private String params;
     private long startTime;
+    // 单位纳秒
     private long duration;
     private long fetchRowCount;
+    private boolean isSlowSql;
 
-    public SqlMonitor(List<Interceptor> interceptors) {
-        this.interceptors = interceptors;
+    public SqlMonitor(SlowSqlConfig config) {
+        this.config = config;
     }
 
-    public SqlMonitor(List<Interceptor> interceptors, String sql) {
-        this.interceptors = interceptors;
+    public SqlMonitor(SlowSqlConfig config, String sql) {
+        this.config = config;
         this.sql = sql;
     }
 
     public void beforeExecute() {
         this.startTime = System.nanoTime();
-        for (Interceptor innerInterceptor : this.interceptors) {
+        this.fetchRowCount = 0;
+        for (Interceptor innerInterceptor : this.config.getInterceptors()) {
             innerInterceptor.beforeExecute(this);
         }
     }
 
     public void afterExecute() {
         this.duration = System.nanoTime() - this.startTime;
-        for (Interceptor innerInterceptor : this.interceptors) {
+        long millis = this.duration / (1000 * 1000);
+        // 判断是否为慢sql
+        if (millis >= config.getSlowMillis()) {
+            this.isSlowSql = true;
+        }
+        for (Interceptor innerInterceptor : this.config.getInterceptors()) {
             innerInterceptor.afterExecute(this);
         }
     }
 
-    public ResultSet fetchRowCount(ResultSet rs) throws SQLException {
-        fetchRowCount = 0L;
-        // 创建新的CachedRowSet
-        CachedRowSet newRs = RowSetProvider.newFactory().createCachedRowSet();
-        // 遍历CachedRowSet中的每一行
-        while (newRs.next()) {
-            fetchRowCount++;
+    public void closeExecute() {
+        for (Interceptor innerInterceptor : this.config.getInterceptors()) {
+            innerInterceptor.closeExecute(this);
         }
-        newRs.close();
-        // 返回原rs
-        return rs;
+    }
+
+    public void incrementRowCount() {
+        this.fetchRowCount++;
     }
 
     public void setSql(String sql) {
         this.sql = sql;
+    }
+
+    public boolean isSlowSql() {
+        return isSlowSql;
+    }
+
+    public void setSlowSql(boolean slowSql) {
+        isSlowSql = slowSql;
     }
 
     public void clear() {
@@ -64,6 +78,7 @@ public class SqlMonitor {
         this.startTime = -1;
         this.duration = -1;
         this.fetchRowCount = -1;
+        this.isSlowSql = false;
     }
 
     @Override
