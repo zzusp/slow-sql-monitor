@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "defaultValue": 1000,
+      "name": "slow-sql-monitor.slow-millis",
+      "description": "Set whether enable lazy initialization for mapper bean.",
+      "type": "java.lang.Long"
+    }
+  ]
+}

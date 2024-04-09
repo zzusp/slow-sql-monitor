@@ -22,6 +22,10 @@ public class SlowSqlDataSource implements DataSource {
         this.config = config;
     }
 
+    public void setConfig(SlowSqlConfig config) {
+        this.config = config;
+    }
+
     public Connection getConnection() throws SQLException {
         return new SlowSqlConnection(dataSource.getConnection(), config);
     }

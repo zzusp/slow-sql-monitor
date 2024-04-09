@@ -3,13 +3,6 @@ package com.slowsql.monitor;
 import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.plugin.Interceptor;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.sql.rowset.CachedRowSet;
-import javax.sql.rowset.RowSetProvider;
-
 public class SqlMonitor {
 
     private SlowSqlConfig config;
