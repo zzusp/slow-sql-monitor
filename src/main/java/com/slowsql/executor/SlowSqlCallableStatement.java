@@ -260,322 +260,322 @@ public class SlowSqlCallableStatement extends SlowSqlPreparedStatement implement
 
     @Override
     public void setBinaryStream(String parameterName, InputStream x, int length) throws SQLException {
-
+        callableStatement.setBinaryStream(parameterName, x, length);
     }
 
     @Override
     public void setObject(String parameterName, Object x, int targetSqlType, int scale) throws SQLException {
-
+        callableStatement.setObject(parameterName, x, targetSqlType, scale);
     }
 
     @Override
     public void setObject(String parameterName, Object x, int targetSqlType) throws SQLException {
-
+        callableStatement.setObject(parameterName, x, targetSqlType);
     }
 
     @Override
     public void setObject(String parameterName, Object x) throws SQLException {
-
+        callableStatement.setObject(parameterName, x);
     }
 
     @Override
     public void setCharacterStream(String parameterName, Reader reader, int length) throws SQLException {
-
+        callableStatement.setCharacterStream(parameterName, reader, length);
     }
 
     @Override
     public void setDate(String parameterName, Date x, Calendar cal) throws SQLException {
-
+        callableStatement.setDate(parameterName, x, cal);
     }
 
     @Override
     public void setTime(String parameterName, Time x, Calendar cal) throws SQLException {
-
+        callableStatement.setTime(parameterName, x, cal);
     }
 
     @Override
     public void setTimestamp(String parameterName, Timestamp x, Calendar cal) throws SQLException {
-
+        callableStatement.setTimestamp(parameterName, x, cal);
     }
 
     @Override
     public void setNull(String parameterName, int sqlType, String typeName) throws SQLException {
-
+        callableStatement.setNull(parameterName, sqlType, typeName);
     }
 
     @Override
     public String getString(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getString(parameterName);
     }
 
     @Override
     public boolean getBoolean(String parameterName) throws SQLException {
-        return false;
+        return callableStatement.getBoolean(parameterName);
     }
 
     @Override
     public byte getByte(String parameterName) throws SQLException {
-        return 0;
+        return callableStatement.getByte(parameterName);
     }
 
     @Override
     public short getShort(String parameterName) throws SQLException {
-        return 0;
+        return callableStatement.getShort(parameterName);
     }
 
     @Override
     public int getInt(String parameterName) throws SQLException {
-        return 0;
+        return callableStatement.getInt(parameterName);
     }
 
     @Override
     public long getLong(String parameterName) throws SQLException {
-        return 0;
+        return callableStatement.getLong(parameterName);
     }
 
     @Override
     public float getFloat(String parameterName) throws SQLException {
-        return 0;
+        return callableStatement.getFloat(parameterName);
     }
 
     @Override
     public double getDouble(String parameterName) throws SQLException {
-        return 0;
+        return callableStatement.getDouble(parameterName);
     }
 
     @Override
     public byte[] getBytes(String parameterName) throws SQLException {
-        return new byte[0];
+        return callableStatement.getBytes(parameterName);
     }
 
     @Override
     public Date getDate(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getDate(parameterName);
     }
 
     @Override
     public Time getTime(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getTime(parameterName);
     }
 
     @Override
     public Timestamp getTimestamp(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getTimestamp(parameterName);
     }
 
     @Override
     public Object getObject(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getObject(parameterName);
     }
 
     @Override
     public BigDecimal getBigDecimal(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getBigDecimal(parameterName);
     }
 
     @Override
     public Object getObject(String parameterName, Map<String, Class<?>> map) throws SQLException {
-        return null;
+        return callableStatement.getObject(parameterName, map);
     }
 
     @Override
     public Ref getRef(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getRef(parameterName);
     }
 
     @Override
     public Blob getBlob(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getBlob(parameterName);
     }
 
     @Override
     public Clob getClob(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getClob(parameterName);
     }
 
     @Override
     public Array getArray(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getArray(parameterName);
     }
 
     @Override
     public Date getDate(String parameterName, Calendar cal) throws SQLException {
-        return null;
+        return callableStatement.getDate(parameterName, cal);
     }
 
     @Override
     public Time getTime(String parameterName, Calendar cal) throws SQLException {
-        return null;
+        return callableStatement.getTime(parameterName, cal);
     }
 
     @Override
     public Timestamp getTimestamp(String parameterName, Calendar cal) throws SQLException {
-        return null;
+        return callableStatement.getTimestamp(parameterName, cal);
     }
 
     @Override
     public URL getURL(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getURL(parameterName);
     }
 
     @Override
     public RowId getRowId(int parameterIndex) throws SQLException {
-        return null;
+        return callableStatement.getRowId(parameterIndex);
     }
 
     @Override
     public RowId getRowId(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getRowId(parameterName);
     }
 
     @Override
     public void setRowId(String parameterName, RowId x) throws SQLException {
-
+        callableStatement.setRowId(parameterName, x);
     }
 
     @Override
     public void setNString(String parameterName, String value) throws SQLException {
-
+        callableStatement.setNString(parameterName, value);
     }
 
     @Override
     public void setNCharacterStream(String parameterName, Reader value, long length) throws SQLException {
-
+        callableStatement.setNCharacterStream(parameterName, value, length);
     }
 
     @Override
     public void setNClob(String parameterName, NClob value) throws SQLException {
-
+        callableStatement.setNClob(parameterName, value);
     }
 
     @Override
     public void setClob(String parameterName, Reader reader, long length) throws SQLException {
-
+        callableStatement.setClob(parameterName, reader, length);
     }
 
     @Override
     public void setBlob(String parameterName, InputStream inputStream, long length) throws SQLException {
-
+        callableStatement.setBlob(parameterName, inputStream, length);
     }
 
     @Override
     public void setNClob(String parameterName, Reader reader, long length) throws SQLException {
-
+        callableStatement.setNClob(parameterName, reader, length);
     }
 
     @Override
     public NClob getNClob(int parameterIndex) throws SQLException {
-        return null;
+        return callableStatement.getNClob(parameterIndex);
     }
 
     @Override
     public NClob getNClob(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getNClob(parameterName);
     }
 
     @Override
     public void setSQLXML(String parameterName, SQLXML xmlObject) throws SQLException {
-
+        callableStatement.setSQLXML(parameterName, xmlObject);
     }
 
     @Override
     public SQLXML getSQLXML(int parameterIndex) throws SQLException {
-        return null;
+        return callableStatement.getSQLXML(parameterIndex);
     }
 
     @Override
     public SQLXML getSQLXML(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getSQLXML(parameterName);
     }
 
     @Override
     public String getNString(int parameterIndex) throws SQLException {
-        return null;
+        return callableStatement.getNString(parameterIndex);
     }
 
     @Override
     public String getNString(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getNString(parameterName);
     }
 
     @Override
     public Reader getNCharacterStream(int parameterIndex) throws SQLException {
-        return null;
+        return callableStatement.getNCharacterStream(parameterIndex);
     }
 
     @Override
     public Reader getNCharacterStream(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getNCharacterStream(parameterName);
     }
 
     @Override
     public Reader getCharacterStream(int parameterIndex) throws SQLException {
-        return null;
+        return callableStatement.getCharacterStream(parameterIndex);
     }
 
     @Override
     public Reader getCharacterStream(String parameterName) throws SQLException {
-        return null;
+        return callableStatement.getCharacterStream(parameterName);
     }
 
     @Override
     public void setBlob(String parameterName, Blob x) throws SQLException {
-
+        callableStatement.setBlob(parameterName, x);
     }
 
     @Override
     public void setClob(String parameterName, Clob x) throws SQLException {
-
+        callableStatement.setClob(parameterName, x);
     }
 
     @Override
     public void setAsciiStream(String parameterName, InputStream x, long length) throws SQLException {
-
+        callableStatement.setAsciiStream(parameterName, x, length);
     }
 
     @Override
     public void setBinaryStream(String parameterName, InputStream x, long length) throws SQLException {
-
+        callableStatement.setBinaryStream(parameterName, x, length);
     }
 
     @Override
     public void setCharacterStream(String parameterName, Reader reader, long length) throws SQLException {
-
+        callableStatement.setCharacterStream(parameterName, reader, length);
     }
 
     @Override
     public void setAsciiStream(String parameterName, InputStream x) throws SQLException {
-
+        callableStatement.setAsciiStream(parameterName, x);
     }
 
     @Override
     public void setBinaryStream(String parameterName, InputStream x) throws SQLException {
-
+        callableStatement.setBinaryStream(parameterName, x);
     }
 
     @Override
     public void setCharacterStream(String parameterName, Reader reader) throws SQLException {
-
+        callableStatement.setCharacterStream(parameterName, reader);
     }
 
     @Override
     public void setNCharacterStream(String parameterName, Reader value) throws SQLException {
-
+        callableStatement.setNCharacterStream(parameterName, value);
     }
 
     @Override
     public void setClob(String parameterName, Reader reader) throws SQLException {
-
+        callableStatement.setClob(parameterName, reader);
     }
 
     @Override
     public void setBlob(String parameterName, InputStream inputStream) throws SQLException {
-
+        callableStatement.setBlob(parameterName, inputStream);
     }
 
     @Override
     public void setNClob(String parameterName, Reader reader) throws SQLException {
-
+        callableStatement.setNClob(parameterName, reader);
     }
 
     @Override
