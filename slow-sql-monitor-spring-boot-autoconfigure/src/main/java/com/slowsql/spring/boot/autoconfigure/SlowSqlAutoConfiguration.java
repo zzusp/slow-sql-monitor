@@ -13,7 +13,9 @@ public class SlowSqlAutoConfiguration {
     @Bean
     public SlowSqlMonitorBeanProcessor slowSqlMonitor(SlowSqlProperties properties) {
         SlowSqlConfig config = new SlowSqlConfig();
-        config.setSlowMillis(properties.getSlowMillis());
+        if (properties != null) {
+            config.setSlowMillis(properties.getSlowMillis());
+        }
         return new SlowSqlMonitorBeanProcessor(config);
     }
 

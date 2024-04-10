@@ -4,15 +4,20 @@ import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.pool.SlowSqlDataSource;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.core.PriorityOrdered;
 
 import javax.sql.DataSource;
 
-public class SlowSqlMonitorBeanProcessor implements BeanPostProcessor {
+public class SlowSqlMonitorBeanProcessor implements PriorityOrdered, BeanPostProcessor {
 
     private final SlowSqlConfig slowSqlConfig;;
 
     public SlowSqlMonitorBeanProcessor(SlowSqlConfig slowSqlConfig) {
         this.slowSqlConfig = slowSqlConfig;
+    }
+
+    public int getOrder() {
+        return 2147483647;
     }
 
     @Override

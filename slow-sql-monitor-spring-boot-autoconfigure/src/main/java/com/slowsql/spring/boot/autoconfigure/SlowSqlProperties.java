@@ -9,6 +9,11 @@ public class SlowSqlProperties {
 
     private Long slowMillis;
 
+    public SlowSqlProperties() {
+        // 设置默认值
+        this.slowMillis = 1000L;
+    }
+
     public Long getSlowMillis() {
         return slowMillis;
     }

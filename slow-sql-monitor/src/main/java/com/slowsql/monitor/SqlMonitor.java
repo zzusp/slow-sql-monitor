@@ -53,6 +53,10 @@ public class SqlMonitor {
         this.fetchRowCount++;
     }
 
+    public String getSql() {
+        return sql;
+    }
+
     public void setSql(String sql) {
         this.sql = sql;
     }
@@ -63,6 +67,38 @@ public class SqlMonitor {
 
     public void setSlowSql(boolean slowSql) {
         isSlowSql = slowSql;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public long getFetchRowCount() {
+        return fetchRowCount;
+    }
+
+    public void setFetchRowCount(long fetchRowCount) {
+        this.fetchRowCount = fetchRowCount;
     }
 
     public void clear() {
