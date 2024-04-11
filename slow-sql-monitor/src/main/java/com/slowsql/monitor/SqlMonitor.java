@@ -3,14 +3,19 @@ package com.slowsql.monitor;
 import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.plugin.Interceptor;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class SqlMonitor {
 
-    private SlowSqlConfig config;
+    private final SlowSqlConfig config;
     private String sql;
-    private String params;
+    private List<String> params = new ArrayList<>();
     private long startTime;
     // 单位纳秒
     private long duration;
+    // 结果集总行数
     private long fetchRowCount;
     private boolean isSlowSql;
 
@@ -23,10 +28,19 @@ public class SqlMonitor {
         this.sql = sql;
     }
 
+    public void addParam(Object param) {
+        if (param == null) {
+            this.params.add("null");
+        } else {
+            String[] arr = param.getClass().getName().split("\\.");
+            this.params.add(param.toString() + "(" + arr[arr.length - 1] + ")");
+        }
+    }
+
     public void beforeExecute() {
         this.startTime = System.nanoTime();
         this.fetchRowCount = 0;
-        for (Interceptor innerInterceptor : this.config.getInterceptors()) {
+        for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
             innerInterceptor.beforeExecute(this);
         }
     }
@@ -35,18 +49,19 @@ public class SqlMonitor {
         this.duration = System.nanoTime() - this.startTime;
         long millis = this.duration / (1000 * 1000);
         // 判断是否为慢sql
-        if (millis >= config.getSlowMillis()) {
+        if (millis >= config.getSlowMillis() && this.sql != null && this.sql.length() > 0) {
             this.isSlowSql = true;
         }
-        for (Interceptor innerInterceptor : this.config.getInterceptors()) {
+        for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
             innerInterceptor.afterExecute(this);
         }
     }
 
     public void closeExecute() {
-        for (Interceptor innerInterceptor : this.config.getInterceptors()) {
+        for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
             innerInterceptor.closeExecute(this);
         }
+        this.clear();
     }
 
     public void incrementRowCount() {
@@ -69,11 +84,11 @@ public class SqlMonitor {
         isSlowSql = slowSql;
     }
 
-    public String getParams() {
+    public List<String> getParams() {
         return params;
     }
 
-    public void setParams(String params) {
+    public void setParams(List<String> params) {
         this.params = params;
     }
 
@@ -103,7 +118,7 @@ public class SqlMonitor {
 
     public void clear() {
         this.sql = null;
-        this.params = null;
+        this.params.clear();
         this.startTime = -1;
         this.duration = -1;
         this.fetchRowCount = -1;

@@ -3,6 +3,7 @@ package com.slowsql.test.spring;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.spring.SlowSqlMonitorBeanProcessor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,6 +29,7 @@ public class AppConfig {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public SlowSqlMonitorBeanProcessor slowSqlMonitor() {
         SlowSqlConfig config = new SlowSqlConfig();
         return new SlowSqlMonitorBeanProcessor(config);

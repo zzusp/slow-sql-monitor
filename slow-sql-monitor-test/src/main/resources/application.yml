@@ -7,7 +7,7 @@ slow-sql-monitor:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.1.10:3306/ase_release?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
     username: ase
     password: fEJ0CnDop54mQYB!

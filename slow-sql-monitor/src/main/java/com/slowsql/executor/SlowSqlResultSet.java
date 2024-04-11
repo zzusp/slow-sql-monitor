@@ -33,7 +33,6 @@ public class SlowSqlResultSet implements ResultSet {
     public void close() throws SQLException {
         resultSet.close();
         this.sqlMonitor.closeExecute();
-        this.sqlMonitor.clear();
     }
 
     @Override

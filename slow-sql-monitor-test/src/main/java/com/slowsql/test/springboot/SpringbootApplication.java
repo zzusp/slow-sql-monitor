@@ -1,5 +1,7 @@
 package com.slowsql.test.springboot;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
+import com.slowsql.spring.boot.autoconfigure.EnableSlowSqlMonitor;
 import com.slowsql.test.UserMapper;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
 
 @SpringBootApplication
+@EnableSlowSqlMonitor
 public class SpringbootApplication {
 
     public static void main(String[] args) {

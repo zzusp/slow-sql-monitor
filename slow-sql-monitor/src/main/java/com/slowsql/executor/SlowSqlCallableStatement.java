@@ -180,126 +180,152 @@ public class SlowSqlCallableStatement extends SlowSqlPreparedStatement implement
 
     @Override
     public void setURL(String parameterName, URL val) throws SQLException {
+        sqlMonitor.addParam(val);
         callableStatement.setURL(parameterName, val);
     }
 
     @Override
     public void setNull(String parameterName, int sqlType) throws SQLException {
+        sqlMonitor.addParam(null);
         callableStatement.setNull(parameterName, sqlType);
     }
 
     @Override
     public void setBoolean(String parameterName, boolean x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setBoolean(parameterName, x);
     }
 
     @Override
     public void setByte(String parameterName, byte x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setByte(parameterName, x);
     }
 
     @Override
     public void setShort(String parameterName, short x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setShort(parameterName, x);
     }
 
     @Override
     public void setInt(String parameterName, int x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setInt(parameterName, x);
     }
 
     @Override
     public void setLong(String parameterName, long x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setLong(parameterName, x);
     }
 
     @Override
     public void setFloat(String parameterName, float x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setFloat(parameterName, x);
     }
 
     @Override
     public void setDouble(String parameterName, double x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setDouble(parameterName, x);
     }
 
     @Override
     public void setBigDecimal(String parameterName, BigDecimal x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setBigDecimal(parameterName, x);
     }
 
     @Override
     public void setString(String parameterName, String x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setString(parameterName, x);
     }
 
     @Override
     public void setBytes(String parameterName, byte[] x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setBytes(parameterName, x);
     }
 
     @Override
     public void setDate(String parameterName, Date x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setDate(parameterName, x);
     }
 
     @Override
     public void setTime(String parameterName, Time x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setTime(parameterName, x);
     }
 
     @Override
     public void setTimestamp(String parameterName, Timestamp x) throws SQLException {
+        sqlMonitor.addParam(x);
+        sqlMonitor.addParam(x);
         callableStatement.setTimestamp(parameterName, x);
     }
 
     @Override
     public void setAsciiStream(String parameterName, InputStream x, int length) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setAsciiStream(parameterName, x, length);
     }
 
     @Override
     public void setBinaryStream(String parameterName, InputStream x, int length) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setBinaryStream(parameterName, x, length);
     }
 
     @Override
     public void setObject(String parameterName, Object x, int targetSqlType, int scale) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setObject(parameterName, x, targetSqlType, scale);
     }
 
     @Override
     public void setObject(String parameterName, Object x, int targetSqlType) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setObject(parameterName, x, targetSqlType);
     }
 
     @Override
     public void setObject(String parameterName, Object x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setObject(parameterName, x);
     }
 
     @Override
     public void setCharacterStream(String parameterName, Reader reader, int length) throws SQLException {
+        sqlMonitor.addParam(reader);
         callableStatement.setCharacterStream(parameterName, reader, length);
     }
 
     @Override
     public void setDate(String parameterName, Date x, Calendar cal) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setDate(parameterName, x, cal);
     }
 
     @Override
     public void setTime(String parameterName, Time x, Calendar cal) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setTime(parameterName, x, cal);
     }
 
     @Override
     public void setTimestamp(String parameterName, Timestamp x, Calendar cal) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setTimestamp(parameterName, x, cal);
     }
 
     @Override
     public void setNull(String parameterName, int sqlType, String typeName) throws SQLException {
+        sqlMonitor.addParam(null);
         callableStatement.setNull(parameterName, sqlType, typeName);
     }
 
@@ -430,36 +456,43 @@ public class SlowSqlCallableStatement extends SlowSqlPreparedStatement implement
 
     @Override
     public void setRowId(String parameterName, RowId x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setRowId(parameterName, x);
     }
 
     @Override
     public void setNString(String parameterName, String value) throws SQLException {
+        sqlMonitor.addParam(value);
         callableStatement.setNString(parameterName, value);
     }
 
     @Override
     public void setNCharacterStream(String parameterName, Reader value, long length) throws SQLException {
+        sqlMonitor.addParam(value);
         callableStatement.setNCharacterStream(parameterName, value, length);
     }
 
     @Override
     public void setNClob(String parameterName, NClob value) throws SQLException {
+        sqlMonitor.addParam(value);
         callableStatement.setNClob(parameterName, value);
     }
 
     @Override
     public void setClob(String parameterName, Reader reader, long length) throws SQLException {
+        sqlMonitor.addParam(reader);
         callableStatement.setClob(parameterName, reader, length);
     }
 
     @Override
     public void setBlob(String parameterName, InputStream inputStream, long length) throws SQLException {
+        sqlMonitor.addParam(inputStream);
         callableStatement.setBlob(parameterName, inputStream, length);
     }
 
     @Override
     public void setNClob(String parameterName, Reader reader, long length) throws SQLException {
+        sqlMonitor.addParam(reader);
         callableStatement.setNClob(parameterName, reader, length);
     }
 
@@ -475,6 +508,7 @@ public class SlowSqlCallableStatement extends SlowSqlPreparedStatement implement
 
     @Override
     public void setSQLXML(String parameterName, SQLXML xmlObject) throws SQLException {
+        sqlMonitor.addParam(xmlObject);
         callableStatement.setSQLXML(parameterName, xmlObject);
     }
 
@@ -520,61 +554,73 @@ public class SlowSqlCallableStatement extends SlowSqlPreparedStatement implement
 
     @Override
     public void setBlob(String parameterName, Blob x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setBlob(parameterName, x);
     }
 
     @Override
     public void setClob(String parameterName, Clob x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setClob(parameterName, x);
     }
 
     @Override
     public void setAsciiStream(String parameterName, InputStream x, long length) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setAsciiStream(parameterName, x, length);
     }
 
     @Override
     public void setBinaryStream(String parameterName, InputStream x, long length) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setBinaryStream(parameterName, x, length);
     }
 
     @Override
     public void setCharacterStream(String parameterName, Reader reader, long length) throws SQLException {
+        sqlMonitor.addParam(reader);
         callableStatement.setCharacterStream(parameterName, reader, length);
     }
 
     @Override
     public void setAsciiStream(String parameterName, InputStream x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setAsciiStream(parameterName, x);
     }
 
     @Override
     public void setBinaryStream(String parameterName, InputStream x) throws SQLException {
+        sqlMonitor.addParam(x);
         callableStatement.setBinaryStream(parameterName, x);
     }
 
     @Override
     public void setCharacterStream(String parameterName, Reader reader) throws SQLException {
+        sqlMonitor.addParam(reader);
         callableStatement.setCharacterStream(parameterName, reader);
     }
 
     @Override
     public void setNCharacterStream(String parameterName, Reader value) throws SQLException {
+        sqlMonitor.addParam(value);
         callableStatement.setNCharacterStream(parameterName, value);
     }
 
     @Override
     public void setClob(String parameterName, Reader reader) throws SQLException {
+        sqlMonitor.addParam(reader);
         callableStatement.setClob(parameterName, reader);
     }
 
     @Override
     public void setBlob(String parameterName, InputStream inputStream) throws SQLException {
+        sqlMonitor.addParam(inputStream);
         callableStatement.setBlob(parameterName, inputStream);
     }
 
     @Override
     public void setNClob(String parameterName, Reader reader) throws SQLException {
+        sqlMonitor.addParam(reader);
         callableStatement.setNClob(parameterName, reader);
     }
 

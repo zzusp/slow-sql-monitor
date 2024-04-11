@@ -1,21 +1,18 @@
 package com.slowsql.config;
 
-import com.slowsql.plugin.Interceptor;
+import com.slowsql.plugin.InterceptorChain;
 import com.slowsql.plugin.LogInterceptor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SlowSqlConfig {
 
     /** 慢sql时长 */
     private long slowMillis = 1000L;
     /** 慢sql拦截器拓展 */
-    private List<Interceptor> interceptors = new ArrayList<>();
+    private InterceptorChain interceptorChain = new InterceptorChain();
 
     public SlowSqlConfig() {
         // 默认添加日志拦截
-        this.addInterceptors(new LogInterceptor());
+        this.interceptorChain.addInterceptor(new LogInterceptor());
     }
 
     public long getSlowMillis() {
@@ -26,11 +23,11 @@ public class SlowSqlConfig {
         this.slowMillis = slowMillis;
     }
 
-    public List<Interceptor> getInterceptors() {
-        return interceptors;
+    public InterceptorChain getInterceptorChain() {
+        return interceptorChain;
     }
 
-    public void addInterceptors(Interceptor interceptor) {
-        this.interceptors.add(interceptor);
+    public void setInterceptorChain(InterceptorChain interceptorChain) {
+        this.interceptorChain = interceptorChain;
     }
 }

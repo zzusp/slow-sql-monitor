@@ -42,9 +42,8 @@ public class SlowSqlStatement implements Statement {
 
     @Override
     public void close() throws SQLException {
-        // 清空
-        sqlMonitor.clear();
         statement.close();
+        this.sqlMonitor.closeExecute();
     }
 
     @Override
