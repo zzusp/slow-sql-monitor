@@ -26,16 +26,6 @@ pom.xml
 ```xml
     <dependency>
         <groupId>com.slowsql</groupId>
-        <artifactId>slow-sql-monitor</artifactId>
-        <version>1.0.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.slowsql</groupId>
-        <artifactId>slow-sql-monitor-spring</artifactId>
-        <version>1.0.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.slowsql</groupId>
         <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
         <version>1.0.0</version>
     </dependency>
@@ -61,11 +51,6 @@ public class AppConfig {
 ```
 pom.xml
 ```xml
-    <dependency>
-        <groupId>com.slowsql</groupId>
-        <artifactId>slow-sql-monitor</artifactId>
-        <version>1.0.0</version>
-    </dependency>
     <dependency>
         <groupId>com.slowsql</groupId>
         <artifactId>slow-sql-monitor-spring</artifactId>
