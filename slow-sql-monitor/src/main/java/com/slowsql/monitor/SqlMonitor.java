@@ -2,12 +2,16 @@ package com.slowsql.monitor;
 
 import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.plugin.Interceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class SqlMonitor {
+
+    private final static Logger logger = LoggerFactory.getLogger(SqlMonitor.class);
 
     private final SlowSqlConfig config;
     private String sql;
@@ -29,39 +33,55 @@ public class SqlMonitor {
     }
 
     public void addParam(Object param) {
-        if (param == null) {
-            this.params.add("null");
-        } else {
-            String[] arr = param.getClass().getName().split("\\.");
-            this.params.add(param.toString() + "(" + arr[arr.length - 1] + ")");
+        try {
+            if (param == null) {
+                this.params.add("null");
+            } else {
+                String[] arr = param.getClass().getName().split("\\.");
+                this.params.add(param.toString() + "(" + arr[arr.length - 1] + ")");
+            }
+        } catch (Exception e) {
+            logger.error("add param {} error, message: {}", param, e.getMessage(), e);
         }
     }
 
     public void beforeExecute() {
-        this.startTime = System.nanoTime();
-        this.fetchRowCount = 0;
-        for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
-            innerInterceptor.beforeExecute(this);
+        try {
+            this.startTime = System.nanoTime();
+            this.fetchRowCount = 0;
+            for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
+                innerInterceptor.beforeExecute(this);
+            }
+        } catch (Exception e) {
+            logger.error("before execute error, message: {}", e.getMessage(), e);
         }
     }
 
     public void afterExecute() {
-        this.duration = System.nanoTime() - this.startTime;
-        long millis = this.duration / (1000 * 1000);
-        // 判断是否为慢sql
-        if (millis >= config.getSlowMillis() && this.sql != null && this.sql.length() > 0) {
-            this.isSlowSql = true;
-        }
-        for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
-            innerInterceptor.afterExecute(this);
+        try {
+            this.duration = System.nanoTime() - this.startTime;
+            long millis = this.duration / (1000 * 1000);
+            // 判断是否为慢sql
+            if (millis >= config.getSlowMillis() && this.sql != null && this.sql.length() > 0) {
+                this.isSlowSql = true;
+            }
+            for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
+                innerInterceptor.afterExecute(this);
+            }
+        } catch (Exception e) {
+            logger.error("after execute error, message: {}", e.getMessage(), e);
         }
     }
 
     public void closeExecute() {
-        for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
-            innerInterceptor.closeExecute(this);
+        try {
+            for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
+                innerInterceptor.closeExecute(this);
+            }
+            this.clear();
+        } catch (Exception e) {
+            logger.error("close execute error, message: {}", e.getMessage(), e);
         }
-        this.clear();
     }
 
     public void incrementRowCount() {
