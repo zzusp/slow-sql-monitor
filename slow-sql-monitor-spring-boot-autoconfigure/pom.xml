@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
+    <description>慢SQL监控集成Springboot</description>
 
     <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
 

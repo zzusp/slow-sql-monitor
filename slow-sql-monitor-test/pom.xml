@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>slow-sql-monitor-test</artifactId>
+    <description>慢SQL监控测试</description>
 
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
