@@ -1,5 +1,7 @@
 package com.slowsql.pool;
 
+import com.slowsql.config.SlowSqlConfig;
+
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -10,20 +12,23 @@ import java.util.logging.Logger;
 public class SlowSqlDataSource implements DataSource {
 
     private DataSource dataSource;
+    private SlowSqlConfig config;
 
-    private SlowSqlDataSource() {
+    public SlowSqlDataSource(DataSource dataSource, SlowSqlConfig config) {
+        this.dataSource = dataSource;
+        this.config = config;
     }
 
-    public SlowSqlDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public void setConfig(SlowSqlConfig config) {
+        this.config = config;
     }
 
     public Connection getConnection() throws SQLException {
-        return new SlowSqlConnection(dataSource.getConnection());
+        return new SlowSqlConnection(dataSource.getConnection(), config);
     }
 
     public Connection getConnection(String username, String password) throws SQLException {
-        return new SlowSqlConnection(dataSource.getConnection(username, password));
+        return new SlowSqlConnection(dataSource.getConnection(username, password), config);
     }
 
     public PrintWriter getLogWriter() throws SQLException {
