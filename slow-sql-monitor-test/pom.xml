@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>slow-sql-monitor-project</artifactId>
-        <groupId>com.slowsql</groupId>
+        <groupId>io.github.zzusp</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,6 +12,7 @@
     <artifactId>slow-sql-monitor-test</artifactId>
 
     <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
         <mybatis.version>3.5.7</mybatis.version>
         <druid.version>1.2.22</druid.version>
         <mysql.version>8.0.26</mysql.version>
@@ -19,15 +20,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.slowsql</groupId>
+            <groupId>io.github.zzusp</groupId>
             <artifactId>slow-sql-monitor</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.slowsql</groupId>
+            <groupId>io.github.zzusp</groupId>
             <artifactId>slow-sql-monitor-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.slowsql</groupId>
+            <groupId>io.github.zzusp</groupId>
             <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
         </dependency>
 

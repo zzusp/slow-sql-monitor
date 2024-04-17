@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.lang.NonNull;
 
 import javax.sql.DataSource;
 
@@ -23,7 +24,7 @@ public class SlowSqlMonitorBeanProcessor implements BeanPostProcessor {
 
 
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@NonNull Object bean, @NonNull String beanName) throws BeansException {
         if (bean instanceof Interceptor) {
             slowSqlConfig.getInterceptorChain().addInterceptor((Interceptor) bean);
         }

@@ -14,9 +14,6 @@ public class SlowSqlDataSource implements DataSource {
     private DataSource dataSource;
     private SlowSqlConfig config;
 
-    private SlowSqlDataSource() {
-    }
-
     public SlowSqlDataSource(DataSource dataSource, SlowSqlConfig config) {
         this.dataSource = dataSource;
         this.config = config;

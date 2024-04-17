@@ -80,6 +80,7 @@ public class SlowSqlResultSet implements ResultSet {
         return resultSet.getDouble(columnIndex);
     }
 
+    @Deprecated
     @Override
     public BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException {
         return resultSet.getBigDecimal(columnIndex, scale);
@@ -110,6 +111,7 @@ public class SlowSqlResultSet implements ResultSet {
         return resultSet.getAsciiStream(columnIndex);
     }
 
+    @Deprecated
     @Override
     public InputStream getUnicodeStream(int columnIndex) throws SQLException {
         return resultSet.getUnicodeStream(columnIndex);
@@ -160,6 +162,7 @@ public class SlowSqlResultSet implements ResultSet {
         return resultSet.getDouble(columnLabel);
     }
 
+    @Deprecated
     @Override
     public BigDecimal getBigDecimal(String columnLabel, int scale) throws SQLException {
         return resultSet.getBigDecimal(columnLabel, scale);
@@ -190,6 +193,7 @@ public class SlowSqlResultSet implements ResultSet {
         return resultSet.getAsciiStream(columnLabel);
     }
 
+    @Deprecated
     @Override
     public InputStream getUnicodeStream(String columnLabel) throws SQLException {
         return resultSet.getUnicodeStream(columnLabel);

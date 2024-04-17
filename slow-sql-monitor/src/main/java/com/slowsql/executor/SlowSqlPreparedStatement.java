@@ -11,13 +11,11 @@ import java.util.Calendar;
 
 public class SlowSqlPreparedStatement extends SlowSqlStatement implements PreparedStatement {
 
-    private final Connection connection;
     private final PreparedStatement preparedStatement;
     private final SqlMonitor sqlMonitor;
 
     public SlowSqlPreparedStatement(Connection connection, PreparedStatement preparedStatement, SqlMonitor sqlMonitor) {
         super(connection, preparedStatement, sqlMonitor);
-        this.connection = connection;
         this.preparedStatement = preparedStatement;
         this.sqlMonitor = sqlMonitor;
     }

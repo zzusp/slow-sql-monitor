@@ -16,9 +16,6 @@ public class SlowSqlConnection implements Connection {
     private Connection connection;
     private SlowSqlConfig config;
 
-    private SlowSqlConnection() {
-    }
-
     public SlowSqlConnection(Connection connection, SlowSqlConfig config) {
         this.connection = connection;
         this.config = config;

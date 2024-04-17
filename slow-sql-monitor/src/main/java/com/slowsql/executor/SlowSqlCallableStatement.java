@@ -12,13 +12,11 @@ import java.util.Map;
 
 public class SlowSqlCallableStatement extends SlowSqlPreparedStatement implements CallableStatement {
 
-    private final Connection connection;
     private final CallableStatement callableStatement;
     private final SqlMonitor sqlMonitor;
 
     public SlowSqlCallableStatement(Connection connection, CallableStatement callableStatement, SqlMonitor sqlMonitor) {
         super(connection, callableStatement, sqlMonitor);
-        this.connection = connection;
         this.callableStatement = callableStatement;
         this.sqlMonitor = sqlMonitor;
     }
@@ -80,7 +78,7 @@ public class SlowSqlCallableStatement extends SlowSqlPreparedStatement implement
 
     @Override
     public BigDecimal getBigDecimal(int parameterIndex, int scale) throws SQLException {
-        return callableStatement.getBigDecimal(parameterIndex, scale);
+        throw new SQLFeatureNotSupportedException();
     }
 
     @Override

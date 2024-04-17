@@ -25,7 +25,7 @@ slow-sql-monitor:
 pom.xml
 ```xml
     <dependency>
-        <groupId>com.slowsql</groupId>
+        <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
         <version>1.0.0</version>
     </dependency>
@@ -52,7 +52,7 @@ public class AppConfig {
 pom.xml
 ```xml
     <dependency>
-        <groupId>com.slowsql</groupId>
+        <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-spring</artifactId>
         <version>1.0.0</version>
     </dependency>
@@ -87,7 +87,7 @@ public class SqlMonitor {
 pom.xml
 ```xml
     <dependency>
-        <groupId>com.slowsql</groupId>
+        <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor</artifactId>
         <version>1.0.0</version>
     </dependency>
