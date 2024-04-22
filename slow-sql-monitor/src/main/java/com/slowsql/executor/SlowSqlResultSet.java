@@ -24,7 +24,14 @@ public class SlowSqlResultSet implements ResultSet {
     public boolean next() throws SQLException {
         boolean flag = resultSet.next();
         if (flag) {
+            // 累计总行数
             this.sqlMonitor.incrementRowCount();
+            // 累计结果字节数
+            for (int i = 1; i <= this.getMetaData().getColumnCount(); i++) {
+                if (this.getBytes(i) != null) {
+                    this.sqlMonitor.incrementResultSize(this.getBytes(i).length);
+                }
+            }
         }
         return flag;
     }
@@ -32,7 +39,6 @@ public class SlowSqlResultSet implements ResultSet {
     @Override
     public void close() throws SQLException {
         resultSet.close();
-        this.sqlMonitor.closeExecute();
     }
 
     @Override

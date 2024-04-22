@@ -3,17 +3,23 @@ server:
 
 
 slow-sql-monitor:
-  slow-millis: 3000
+  slow-millis: 500
+  elasticsearch:
+    uris: https://192.168.1.73:9200
+    username: elastic
+    password: edream6598
+    sendMillis: 0
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.10:3306/ase_release?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
-    username: ase
-    password: fEJ0CnDop54mQYB!
-  druid:
-    initialSize: 5
-    minIdle: 10
-    maxActive: 20
-    maxWait: 60000
-    validationQuery: SELECT 1
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.1.10:3306/ase_release?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+      username: ase
+      password: fEJ0CnDop54mQYB!
+      initial-size: 5
+      minIdle: 10
+      maxActive: 20
+      maxWait: 60000
+      validationQuery: SELECT 1
+

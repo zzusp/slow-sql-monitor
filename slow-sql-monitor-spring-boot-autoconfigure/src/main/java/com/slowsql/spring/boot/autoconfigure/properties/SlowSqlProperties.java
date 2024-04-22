@@ -1,4 +1,4 @@
-package com.slowsql.spring.boot.autoconfigure;
+package com.slowsql.spring.boot.autoconfigure.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -7,11 +7,9 @@ public class SlowSqlProperties {
 
     public static final String SLOW_SQL_PREFIX = "slow-sql-monitor";
 
-    private Long slowMillis;
+    private Long slowMillis = 1000L;
 
     public SlowSqlProperties() {
-        // 设置默认值
-        this.slowMillis = 1000L;
     }
 
     public Long getSlowMillis() {

@@ -15,7 +15,6 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <mybatis.version>3.5.7</mybatis.version>
-        <druid.version>1.2.22</druid.version>
         <mysql.version>8.0.26</mysql.version>
     </properties>
 
@@ -31,6 +30,20 @@
         <dependency>
             <groupId>io.github.zzusp</groupId>
             <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.zzusp</groupId>
+            <artifactId>slow-sql-monitor-pool-druid</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.zzusp</groupId>
+            <artifactId>slow-sql-monitor-spring-boot-elasticsearch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>2.0.1</version>
         </dependency>
 
         <dependency>
@@ -61,22 +74,17 @@
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
         <!-- 阿里数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+
 
     </dependencies>
 

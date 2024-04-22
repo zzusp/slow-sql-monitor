@@ -1,0 +1,59 @@
+{
+  "properties": [
+    {
+      "name": "slow-sql-monitor.elasticsearch.uris",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Comma-separated list of the Elasticsearch instances to use.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties",
+      "defaultValue": [
+        "http:\/\/localhost:9200"
+      ]
+    },
+    {
+      "name": "slow-sql-monitor.elasticsearch.username",
+      "type": "java.lang.String",
+      "description": "Username for authentication with Elasticsearch.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties"
+    },
+    {
+      "name": "slow-sql-monitor.elasticsearch.password",
+      "type": "java.lang.String",
+      "description": "Password for authentication with Elasticsearch.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties"
+    },
+    {
+      "name": "slow-sql-monitor.elasticsearch.connection-timeout",
+      "type": "java.time.Duration",
+      "description": "Connection timeout used when communicating with Elasticsearch.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties",
+      "defaultValue": "1s"
+    },
+    {
+      "name": "slow-sql-monitor.elasticsearch.socket-timeout",
+      "type": "java.time.Duration",
+      "description": "Socket timeout used when communicating with Elasticsearch.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties",
+      "defaultValue": "30s"
+    },
+    {
+      "name": "slow-sql-monitor.elasticsearch.path-prefix",
+      "type": "java.lang.String",
+      "description": "Prefix added to the path of every request sent to Elasticsearch.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties"
+    },
+    {
+      "name": "slow-sql-monitor.elasticsearch.index-prefix",
+      "type": "java.lang.String",
+      "description": "Prefix added to the path of every index from Elasticsearch.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties",
+      "defaultValue": "slow_sql_"
+    },
+    {
+      "name": "slow-sql-monitor.elasticsearch.send-millis",
+      "type": "java.lang.Long",
+      "description": "Sql execute millis used when send data to Elasticsearch.",
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties",
+      "defaultValue": "1000"
+    }
+  ]
+}

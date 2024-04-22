@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class SlowSqlDataSource implements DataSource {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
     private SlowSqlConfig config;
 
     public SlowSqlDataSource(DataSource dataSource, SlowSqlConfig config) {
@@ -24,11 +24,11 @@ public class SlowSqlDataSource implements DataSource {
     }
 
     public Connection getConnection() throws SQLException {
-        return new SlowSqlConnection(dataSource.getConnection(), config);
+        return new SlowSqlConnection(dataSource, dataSource.getConnection(), config);
     }
 
     public Connection getConnection(String username, String password) throws SQLException {
-        return new SlowSqlConnection(dataSource.getConnection(username, password), config);
+        return new SlowSqlConnection(dataSource, dataSource.getConnection(username, password), config);
     }
 
     public PrintWriter getLogWriter() throws SQLException {
