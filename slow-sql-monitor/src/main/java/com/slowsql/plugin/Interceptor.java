@@ -1,13 +1,13 @@
 package com.slowsql.plugin;
 
-import com.slowsql.monitor.SqlMonitor;
+import com.slowsql.stat.SlowSqlStat;
 
 public interface Interceptor {
 
-    void beforeExecute(SqlMonitor sqlMonitor);
+    void beforeExecute(SlowSqlStat slowSqlStat);
 
-    void afterExecute(SqlMonitor sqlMonitor);
+    void afterExecute(SlowSqlStat slowSqlStat);
 
-    void closeExecute(SqlMonitor sqlMonitor);
+    void closeExecute(SlowSqlStat slowSqlStat);
 
 }

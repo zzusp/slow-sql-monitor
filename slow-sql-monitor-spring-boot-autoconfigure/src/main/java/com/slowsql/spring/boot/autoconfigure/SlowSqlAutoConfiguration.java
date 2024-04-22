@@ -2,6 +2,7 @@ package com.slowsql.spring.boot.autoconfigure;
 
 import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.spring.SlowSqlMonitorConfiguration;
+import com.slowsql.spring.boot.autoconfigure.properties.SlowSqlProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

@@ -13,11 +13,15 @@
         <module>slow-sql-monitor</module>
         <module>slow-sql-monitor-test</module>
         <module>slow-sql-monitor-spring-boot-autoconfigure</module>
+        <module>slow-sql-monitor-pool</module>
+        <module>slow-sql-monitor-pool-druid</module>
+        <module>slow-sql-monitor-pool-hikari</module>
+        <module>slow-sql-monitor-spring-boot-elasticsearch</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
-        <revision>1.0.0</revision>
+        <revision>1.0.1</revision>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -28,6 +32,9 @@
         <spring.version>5.3.27</spring.version>
         <spring-boot.version>2.7.18</spring-boot.version>
         <slf4j.version>1.7.36</slf4j.version>
+        <druid.version>1.2.22</druid.version>
+        <elasticsearch-java.version>7.17.15</elasticsearch-java.version>
+        <elasticsearch.version>7.17.15</elasticsearch.version>
     </properties>
 
     <url>https://github.com/zzusp/slow-sql-monitor</url>
@@ -71,6 +78,26 @@
             <dependency>
                 <groupId>io.github.zzusp</groupId>
                 <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zzusp</groupId>
+                <artifactId>slow-sql-monitor-pool</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zzusp</groupId>
+                <artifactId>slow-sql-monitor-pool-druid</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zzusp</groupId>
+                <artifactId>slow-sql-monitor-pool-hikari</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zzusp</groupId>
+                <artifactId>slow-sql-monitor-spring-boot-elasticsearch</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -127,6 +154,24 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- 阿里数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>co.elastic.clients</groupId>
+                <artifactId>elasticsearch-java</artifactId>
+                <version>${elasticsearch-java.version}</version>
             </dependency>
 
         </dependencies>

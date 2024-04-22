@@ -8,23 +8,22 @@
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
-    <description>慢SQL监控核心包</description>
+    <description>慢SQL监控集成Druid</description>
 
-
-    <artifactId>slow-sql-monitor</artifactId>
+    <artifactId>slow-sql-monitor-pool-druid</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>io.github.zzusp</groupId>
             <artifactId>slow-sql-monitor-pool</artifactId>
         </dependency>
-
+        <!-- 阿里数据库连接池 -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>
+
 
 </project>

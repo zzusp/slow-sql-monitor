@@ -2,9 +2,13 @@ package com.slowsql.monitor;
 
 import com.slowsql.config.SlowSqlConfig;
 import com.slowsql.plugin.Interceptor;
+import com.slowsql.stat.SlowSqlStat;
+import com.slowsql.stat.pool.PoolStat;
+import com.slowsql.stat.pool.PoolStatServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,21 +16,39 @@ public class SqlMonitor {
 
     private final static Logger logger = LoggerFactory.getLogger(SqlMonitor.class);
 
+    private final DataSource dataSource;
     private final SlowSqlConfig config;
     private String sql;
     private List<String> params = new ArrayList<>();
+    /**
+     * 单位毫秒
+     */
     private long startTime;
-    // 单位纳秒
+    /**
+     * 单位毫秒
+     */
     private long duration;
-    // 结果集总行数
+    /**
+     * 结果集总行数
+     */
     private long fetchRowCount;
+    /**
+     * 结果集数据大小
+     */
+    private long resultSize;
     private boolean isSlowSql;
+    /**
+     * 数据源连接池信息
+     */
+    private PoolStat poolStat;
 
-    public SqlMonitor(SlowSqlConfig config) {
+    public SqlMonitor(DataSource dataSource, SlowSqlConfig config) {
+        this.dataSource = dataSource;
         this.config = config;
     }
 
-    public SqlMonitor(SlowSqlConfig config, String sql) {
+    public SqlMonitor(DataSource dataSource, SlowSqlConfig config, String sql) {
+        this.dataSource = dataSource;
         this.config = config;
         this.sql = sql;
     }
@@ -46,10 +68,12 @@ public class SqlMonitor {
 
     public void beforeExecute() {
         try {
-            this.startTime = System.nanoTime();
+            this.startTime = System.currentTimeMillis();
             this.fetchRowCount = 0;
+            this.resultSize = 0;
+            this.poolStat = PoolStatServiceFactory.getPoolStat(this.dataSource);
             for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
-                innerInterceptor.beforeExecute(this);
+                innerInterceptor.beforeExecute(SlowSqlStat.build(this));
             }
         } catch (Exception e) {
             logger.error("before execute error, message: {}", e.getMessage(), e);
@@ -58,14 +82,13 @@ public class SqlMonitor {
 
     public void afterExecute() {
         try {
-            this.duration = System.nanoTime() - this.startTime;
-            long millis = this.duration / (1000 * 1000);
+            this.duration = System.currentTimeMillis() - this.startTime;
             // 判断是否为慢sql
-            if (millis >= config.getSlowMillis() && this.sql != null && this.sql.length() > 0) {
+            if (this.duration >= config.getSlowMillis() && this.sql != null && this.sql.length() > 0) {
                 this.isSlowSql = true;
             }
             for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
-                innerInterceptor.afterExecute(this);
+                innerInterceptor.afterExecute(SlowSqlStat.build(this));
             }
         } catch (Exception e) {
             logger.error("after execute error, message: {}", e.getMessage(), e);
@@ -75,7 +98,7 @@ public class SqlMonitor {
     public void closeExecute() {
         try {
             for (Interceptor innerInterceptor : this.config.getInterceptorChain().getInterceptors()) {
-                innerInterceptor.closeExecute(this);
+                innerInterceptor.closeExecute(SlowSqlStat.build(this));
             }
             this.clear();
         } catch (Exception e) {
@@ -85,6 +108,10 @@ public class SqlMonitor {
 
     public void incrementRowCount() {
         this.fetchRowCount++;
+    }
+
+    public void incrementResultSize(long byteSize) {
+        this.resultSize += byteSize;
     }
 
     public String getSql() {
@@ -135,13 +162,31 @@ public class SqlMonitor {
         this.fetchRowCount = fetchRowCount;
     }
 
+    public long getResultSize() {
+        return resultSize;
+    }
+
+    public void setResultSize(long resultSize) {
+        this.resultSize = resultSize;
+    }
+
+    public SlowSqlConfig getConfig() {
+        return config;
+    }
+
+    public PoolStat getPoolStat() {
+        return poolStat;
+    }
+
     public void clear() {
         this.sql = null;
         this.params.clear();
         this.startTime = -1;
         this.duration = -1;
         this.fetchRowCount = -1;
+        this.resultSize = -1;
         this.isSlowSql = false;
+        this.poolStat = new PoolStat();
     }
 
     @Override

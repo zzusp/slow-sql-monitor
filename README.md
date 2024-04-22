@@ -24,11 +24,63 @@ slow-sql-monitor:
 ```
 pom.xml
 ```xml
+<dependencys>
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
+    <!-- 如果项目中有使用的druid就引入 -->
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-pool-druid</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+    <!-- 如果项目中有使用的hikari就引入 -->
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-pool-hikari</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+</dependencys>
+```
+自定义拦截器（将拦截器注册为Bean对象，即可自动加载）
+```java
+
+import org.springframework.stereotype.Component;
+import com.slowsql.plugin.Interceptor;
+import com.slowsql.stat.SlowSqlStat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Component
+public class CustomInterceptor implements Interceptor {
+
+    private final static Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
+
+    public CustomInterceptor() {
+    }
+
+    @Override
+    public void beforeExecute(SlowSqlStat slowSqlStat) {
+        // 在SQL执行之前，执行一些操作。为避免影响性能，请务必异步处理！！！
+    }
+
+    @Override
+    public void afterExecute(SlowSqlStat slowSqlStat) {
+        // 在SQL执行之后，执行一些操作。为避免影响性能，请务必异步处理！！！
+    }
+
+    @Override
+    public void closeExecute(SlowSqlStat slowSqlStat) {
+        // 在SQL执行结束，执行一些操作。为避免影响性能，请务必异步处理！！！
+
+        if (slowSqlStat.isSlowSql()) {
+            // 如果为慢SQL，执行一些操作。为避免影响性能，请务必异步处理！！！
+        }
+    }
+}
+
 ```
 ### Spring
 ```java
@@ -51,11 +103,25 @@ public class AppConfig {
 ```
 pom.xml
 ```xml
+<dependencys>
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-spring</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
+    <!-- 如果项目中有使用的druid就引入 -->
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-pool-druid</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+    <!-- 如果项目中有使用的hikari就引入 -->
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-pool-hikari</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+</dependencys>
 ```
 ### Without Spring
 ```java
@@ -86,9 +152,23 @@ public class SqlMonitor {
 ```
 pom.xml
 ```xml
+<dependencys>
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
+    <!-- 如果项目中有使用的druid就引入 -->
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-pool-druid</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+    <!-- 如果项目中有使用的hikari就引入 -->
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-pool-hikari</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+</dependencys>
 ```

@@ -5,9 +5,17 @@ import com.slowsql.plugin.LogInterceptor;
 
 public class SlowSqlConfig {
 
-    /** 慢sql时长 */
+    /**
+     * 慢sql时长
+     */
     private long slowMillis = 1000L;
-    /** 慢sql拦截器拓展 */
+    /**
+     * 是否开启慢sql执行计划
+     */
+    private boolean enableExplain = true;
+    /**
+     * 慢sql拦截器拓展
+     */
     private InterceptorChain interceptorChain = new InterceptorChain();
 
     public SlowSqlConfig() {
@@ -21,6 +29,14 @@ public class SlowSqlConfig {
 
     public void setSlowMillis(long slowMillis) {
         this.slowMillis = slowMillis;
+    }
+
+    public boolean isEnableExplain() {
+        return enableExplain;
+    }
+
+    public void setEnableExplain(boolean enableExplain) {
+        this.enableExplain = enableExplain;
     }
 
     public InterceptorChain getInterceptorChain() {

@@ -2,6 +2,9 @@ package com.slowsql.test;
 
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Aaron.Sun
  * @description 用户信息数据库访问接口
@@ -10,7 +13,7 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface UserMapper {
 
-	@Select("SELECT user_name FROM sys_user WHERE id = #{id}")
-    String queryUserName(String id);
+	@Select("SELECT * FROM schedule_personnel limit 150000")
+    List<Map<String, Object>> queryUserName(String id);
 
 }

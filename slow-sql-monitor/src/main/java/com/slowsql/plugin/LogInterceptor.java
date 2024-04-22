@@ -1,14 +1,15 @@
 package com.slowsql.plugin;
 
-import com.slowsql.monitor.SqlMonitor;
+import com.slowsql.stat.SlowSqlStat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.TimeUnit;
 
 public class LogInterceptor implements Interceptor {
 
@@ -17,27 +18,36 @@ public class LogInterceptor implements Interceptor {
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
     @Override
-    public void beforeExecute(SqlMonitor sqlMonitor) {
+    public void beforeExecute(SlowSqlStat slowSqlStat) {
 
     }
 
     @Override
-    public void afterExecute(SqlMonitor sqlMonitor) {
+    public void afterExecute(SlowSqlStat slowSqlStat) {
 
     }
 
     @Override
-    public void closeExecute(SqlMonitor sqlMonitor) {
-        if (sqlMonitor.isSlowSql()) {
-            long duration = TimeUnit.NANOSECONDS.toMillis(sqlMonitor.getDuration());
-            long start = TimeUnit.NANOSECONDS.toMillis(sqlMonitor.getStartTime());
+    public void closeExecute(SlowSqlStat slowSqlStat) {
+        if (slowSqlStat.isSlowSql()) {
+            long duration = slowSqlStat.getDuration();
+            long start = slowSqlStat.getStartTime().getTime();
             // Convert milliseconds to LocalDateTime
             LocalDateTime date = Instant.ofEpochMilli(start)
                     .atZone(ZoneId.systemDefault())
                     .toLocalDateTime();
+            long size = slowSqlStat.getResultSize();
+            double kbSize = size > 0 ? BigDecimal.valueOf((double) size / 1024)
+                    .setScale(2, RoundingMode.HALF_UP).doubleValue() : 0;
+            logger.error("Time {} find slow sql {} millis, rows {}. sql: {}, param: {}, size: {}KB, poolIdleCount: {}," +
+                            " poolActiveCount: {}, poolWaitCount: {}, poolMaxPoolSize: {}", date.format(formatter),
+                    duration, slowSqlStat.getFetchRowCount(), slowSqlStat.getSql(),
+                    slowSqlStat.getParams(), kbSize, slowSqlStat.getIdleCount(),
+                    slowSqlStat.getActiveCount(), slowSqlStat.getWaitCount(), slowSqlStat.getMaxPoolSize());
 
-            logger.error("Time {} find slow sql {} millis, rows {}. sql: {}, param: {}", date.format(formatter), duration,
-                    sqlMonitor.getFetchRowCount(), sqlMonitor.getSql(), String.join(", ", sqlMonitor.getParams()));
+//            if (sqlMonitor.getConfig().isEnableExplain()) {
+//                // TODO 打印执行计划结果
+//            }
         }
     }
 }
