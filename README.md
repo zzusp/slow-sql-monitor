@@ -1,5 +1,5 @@
 # 慢SQL监控组件
-
+![输入图片说明](dashbaord.png)
 ## Usage
 
 ### Spring boot
