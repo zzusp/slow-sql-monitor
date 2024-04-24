@@ -1,13 +1,14 @@
 server:
   port: 8080
 
-
 slow-sql-monitor:
-  slow-millis: 500
+  slow-millis: 1000
+  log-slow-sql: false
   elasticsearch:
-    uris: https://192.168.1.73:9200
+    enabled: true
+    uris: https://127.0.0.1:9200
     username: elastic
-    password: edream6598
+    password: 123456
     sendMillis: 0
 
 spring:

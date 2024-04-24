@@ -1,4 +1,11 @@
 {
+  "groups": [
+    {
+      "sourceType": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties",
+      "name": "slow-sql-monitor.elasticsearch",
+      "type": "com.slowsql.spring.boot.elasticsearch.properties.SlowSqlElasticsearchProperties"
+    }
+  ],
   "properties": [
     {
       "name": "slow-sql-monitor.elasticsearch.enabled",

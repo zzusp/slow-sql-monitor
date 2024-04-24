@@ -44,10 +44,6 @@ public class LogInterceptor implements Interceptor {
                     duration, slowSqlStat.getFetchRowCount(), slowSqlStat.getSql(),
                     slowSqlStat.getParams(), kbSize, slowSqlStat.getIdleCount(),
                     slowSqlStat.getActiveCount(), slowSqlStat.getWaitCount(), slowSqlStat.getMaxPoolSize());
-
-//            if (sqlMonitor.getConfig().isEnableExplain()) {
-//                // TODO 打印执行计划结果
-//            }
         }
     }
 }
