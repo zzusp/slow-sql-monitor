@@ -1,5 +1,6 @@
 package com.slowsql.config;
 
+import com.slowsql.plugin.Interceptor;
 import com.slowsql.plugin.InterceptorChain;
 import com.slowsql.plugin.LogInterceptor;
 
@@ -10,17 +11,15 @@ public class SlowSqlConfig {
      */
     private long slowMillis = 1000L;
     /**
-     * 是否开启慢sql执行计划
+     * 是否开启慢sql日志打印
      */
-    private boolean enableExplain = true;
+    private boolean logSlowSql = true;
     /**
      * 慢sql拦截器拓展
      */
     private InterceptorChain interceptorChain = new InterceptorChain();
 
     public SlowSqlConfig() {
-        // 默认添加日志拦截
-        this.interceptorChain.addInterceptor(new LogInterceptor());
     }
 
     public long getSlowMillis() {
@@ -31,12 +30,15 @@ public class SlowSqlConfig {
         this.slowMillis = slowMillis;
     }
 
-    public boolean isEnableExplain() {
-        return enableExplain;
+    public boolean isLogSlowSql() {
+        return logSlowSql;
     }
 
-    public void setEnableExplain(boolean enableExplain) {
-        this.enableExplain = enableExplain;
+    public void setLogSlowSql(boolean logSlowSql) {
+        this.logSlowSql = logSlowSql;
+        if (this.logSlowSql) {
+            this.addInterceptor(new LogInterceptor());
+        }
     }
 
     public InterceptorChain getInterceptorChain() {
@@ -45,5 +47,9 @@ public class SlowSqlConfig {
 
     public void setInterceptorChain(InterceptorChain interceptorChain) {
         this.interceptorChain = interceptorChain;
+    }
+
+    public void addInterceptor(Interceptor interceptor) {
+        this.interceptorChain.addInterceptor(interceptor);
     }
 }

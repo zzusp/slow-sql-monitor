@@ -13,6 +13,7 @@ public class SlowSqlElasticsearchProperties {
 
     public static final String SLOW_SQL_ES = SlowSqlProperties.SLOW_SQL_PREFIX + ".elasticsearch";
 
+    private Boolean enabled = true;
     private List<String> uris = new ArrayList<>(Collections.singletonList("http://localhost:9200"));
     private String username;
     private String password;
@@ -23,6 +24,14 @@ public class SlowSqlElasticsearchProperties {
     private Long sendMillis = 1000L;
 
     public SlowSqlElasticsearchProperties() {
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<String> getUris() {

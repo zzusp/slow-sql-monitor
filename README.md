@@ -28,19 +28,19 @@ pom.xml
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     <!-- 如果项目中有使用的druid就引入 -->
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-pool-druid</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     <!-- 如果项目中有使用的hikari就引入 -->
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-pool-hikari</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
 </dependencys>
 ```
@@ -82,6 +82,65 @@ public class CustomInterceptor implements Interceptor {
 }
 
 ```
+#### Spring boot & Elasticsearch
+```java
+
+@SpringBootApplication
+// 开启慢SQL监控
+@EnableSlowSqlMonitor
+public class SpringbootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootApplication.class, args);
+    }
+
+}
+
+```
+application.yml
+```yaml
+slow-sql-monitor:
+  slow-millis: 1000
+  log-slow-sql: false
+  elasticsearch:
+    enabled: true
+    uris: https://127.0.0.1:9200
+    username: elastic
+    password: 123456
+    sendMillis: 0
+```
+
+```xml
+<dependencys>
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-spring-boot-autoconfigure</artifactId>
+        <version>1.0.2</version>
+    </dependency>
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-pool-hikari</artifactId>
+        <version>1.0.2</version>
+    </dependency>
+    <dependency>
+        <groupId>io.github.zzusp</groupId>
+        <artifactId>slow-sql-monitor-spring-boot-elasticsearch</artifactId>
+        <version>1.0.2</version>
+    </dependency>
+    <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>elasticsearch-rest-client</artifactId>
+        <version>7.17.15</version>
+    </dependency>
+    <dependency>
+        <groupId>jakarta.json</groupId>
+        <artifactId>jakarta.json-api</artifactId>
+        <version>2.0.1</version>
+    </dependency>
+</dependencys>
+
+```
+
 ### Spring
 ```java
 
@@ -107,19 +166,19 @@ pom.xml
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-spring</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     <!-- 如果项目中有使用的druid就引入 -->
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-pool-druid</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     <!-- 如果项目中有使用的hikari就引入 -->
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-pool-hikari</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
 </dependencys>
 ```
@@ -156,19 +215,19 @@ pom.xml
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     <!-- 如果项目中有使用的druid就引入 -->
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-pool-druid</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     <!-- 如果项目中有使用的hikari就引入 -->
     <dependency>
         <groupId>io.github.zzusp</groupId>
         <artifactId>slow-sql-monitor-pool-hikari</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
 </dependencys>
 ```

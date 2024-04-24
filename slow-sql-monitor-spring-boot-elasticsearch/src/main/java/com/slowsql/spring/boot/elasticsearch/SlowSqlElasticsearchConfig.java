@@ -16,6 +16,7 @@ import org.apache.http.ssl.SSLContexts;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +31,9 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ThreadPoolExecutor;
 
-@EnableConfigurationProperties({SlowSqlElasticsearchProperties.class})
+@ConditionalOnProperty(prefix = "slow-sql-monitor.elasticsearch",name = "enabled", havingValue = "true", matchIfMissing = true)
 @Configuration
+@EnableConfigurationProperties({SlowSqlElasticsearchProperties.class})
 public class SlowSqlElasticsearchConfig {
 
     @Bean

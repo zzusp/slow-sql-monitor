@@ -1,4 +1,11 @@
 {
+  "groups": [
+    {
+      "sourceType": "com.slowsql.spring.boot.autoconfigure.properties.SlowSqlProperties",
+      "name": "slow-sql-monitor",
+      "type": "com.slowsql.spring.boot.autoconfigure.properties.SlowSqlProperties"
+    }
+  ],
   "properties": [
     {
       "defaultValue": 1000,
@@ -9,7 +16,7 @@
     },
     {
       "defaultValue": true,
-      "name": "slow-sql-monitor.log-slow-sql.enabled",
+      "name": "slow-sql-monitor.log-slow-sql",
       "description": "Set whether enable print slow sql log.",
       "type": "java.lang.Boolean",
       "sourceType": "com.slowsql.spring.boot.autoconfigure.properties.SlowSqlProperties"

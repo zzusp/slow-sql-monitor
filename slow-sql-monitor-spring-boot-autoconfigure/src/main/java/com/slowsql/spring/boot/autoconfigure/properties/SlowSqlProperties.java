@@ -8,6 +8,7 @@ public class SlowSqlProperties {
     public static final String SLOW_SQL_PREFIX = "slow-sql-monitor";
 
     private Long slowMillis = 1000L;
+    private Boolean logSlowSql = true;
 
     public SlowSqlProperties() {
     }
@@ -18,5 +19,13 @@ public class SlowSqlProperties {
 
     public void setSlowMillis(Long slowMillis) {
         this.slowMillis = slowMillis;
+    }
+
+    public Boolean getLogSlowSql() {
+        return logSlowSql;
+    }
+
+    public void setLogSlowSql(Boolean logSlowSql) {
+        this.logSlowSql = logSlowSql;
     }
 }
